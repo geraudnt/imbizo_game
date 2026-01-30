@@ -39,8 +39,8 @@ parser.add_argument("--seed", help="Random seed", type=int, default=None)
 if __name__ == "__main__":
     args = parser.parse_args()
     gym.logger.set_level(gym.logger.ERROR) 
-    q_dir = args.q_dir if args.q_dir else f'./data/{args.algo}_vf/{args.env}/'
-    sp_dir = args.sp_dir if args.sp_dir else f'./data/{args.algo}_wvf/{args.env}/'
+    q_dir = args.q_dir if args.q_dir else f'./data/sm_{args.algo}/{args.env}/'
+    sp_dir = args.sp_dir if args.sp_dir else f'./data/sp_{args.algo}/{args.env}/'
   
     # Initialise the MDP for the given temporal logic task
     if "Task" in args.env: task_env = gym.make(args.env, render_mode=args.render_mode, test=True)

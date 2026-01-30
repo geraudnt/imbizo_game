@@ -61,7 +61,7 @@ def step(action):
     redraw(obs)
 
 def key_handler(key):
-    keys = {27:'escape', 8:'backspace', 13:'enter', 32:' ', 81:'left', 82:'up', 83:'right', 84:'down', 97:'a', 98:'b'}
+    keys = {27:'escape', 8:'backspace', 13:'enter', 32:' ', 81:'left', 82:'up', 83:'right', 84:'down'}
     if key not in keys: print('Unknown pressed', key); return
     key = keys[key]
     print('pressed', key)
@@ -80,7 +80,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--env", help="the agent's environment. It can also be the RM augmented environment for a predefined task distribution.", default='Office-v0')
 parser.add_argument("--primitive", help="the task primitive the agent should solve. E.g. p_A. Leave empty to show the regular environment.", default="")
 parser.add_argument("--ltl", help="the ltl task the agent should solve. E.g. (F (c & X (F o))) & (G~d). Leave empty to show the regular environment.", default="")
-parser.add_argument("--render_mode", help="", default="rgb_array")
 parser.add_argument("--window_width", help="Render mode. E.g. human, rgb_array", type=int, default=2000)
 parser.add_argument("--seed", type=int, help="random seed to generate the environment with", default=None)
 parser.add_argument("--agent_view", help="Render agent observation", action='store_true', default=False)
@@ -89,10 +88,10 @@ args = parser.parse_args()
 if __name__ == "__main__":
     gym.logger.set_level(gym.logger.ERROR) 
     
-    env = gym.make(args.env, render_mode = args.render_mode)
+    env = gym.make(args.env, render_mode = "rgb_array")
     if not hasattr(env, "constraints"): env.constraints=env.predicates
-    if args.primitive: env = TaskPrimitive(env, args.primitive, wvf=False, render_mode = args.render_mode)
-    elif args.ltl:     env = Task(env, args.ltl, render_mode = args.render_mode)
+    if args.primitive: env = TaskPrimitive(env, args.primitive, wvf=False, render_mode = "rgb_array")
+    elif args.ltl:     env = Task(env, args.ltl, render_mode = "rgb_array")
     print("Observation space: ", env.observation_space)
     
     cv2.namedWindow(args.env, cv2.WINDOW_NORMAL); start()

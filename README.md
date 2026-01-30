@@ -18,14 +18,8 @@ This code has been tested in Ubuntu >= 20.04 LTS
 
 Install the required packages:
 ```
-conda create --name sm python==3.8
+conda env create -f environment.yml
 conda activate sm
-pip install -r requirements.txt
-```
-
-Install the spot library for handling LTL and automata task specifications:
-```
-conda install -c conda-forge spot
 ```
 
 To run the Safety-Gym experiments, you need to install Openai mujoco-py by following the instructions in: [https://github.com/openai/mujoco-py](https://github.com/openai/mujoco-py). 
@@ -38,8 +32,9 @@ pip install -e .
 The baselines in the paper use the code base from Icarte et al.: [https://github.com/RodrigoToroIcarte/reward_machines](https://github.com/RodrigoToroIcarte/reward_machines).  
 To be able to run them, instead install the following required packages:
 ```
-cd baselines_iclr
-pip install -r requirements.txt
+conda env create -f baselines_iclr/environment.yml
+conda activate sm
+pip install -e git+https://github.com/openai/baselines.git@ea25b9e8b234e6ee1bca43083f8f3cf974143998#egg=baselines
 ```
 
 ## Reproduce Experiments from Paper
@@ -108,7 +103,7 @@ python ql.py --env Office-CoffeeMail-Task-v0 --total_steps 400000 --log_dir data
 
 **To visualise trained policies:**
 ```
-python enjoy.py --algo ql --env Office-CoffeeMail-Task-v0 --sp_dir data/Office-v0/
+python enjoy.py --algo ql --env Office-CoffeeMail-Task-v0 --sp_dir data/sp_ql/Office-v0/
 python enjoy.py --algo ql --env Office-CoffeeMail-Task-v0 --q_dir data/sm_ql/Office-CoffeeMail-Task-v0/ --fewshot
 ```
 <table>
@@ -166,7 +161,7 @@ python enjoy.py --algo td3 --env Safety-Task-4-v0 --sp_dir data/Safety-v0/
 
 <table>
   <tr>
-    <td> <div style="position: absolute; top: 50%; right: 50%;">Safety-Task-3-v0 <br> F(buttons & X(F (( goal & ~hazards )&X(F(( buttons & hazards )&X(F goal)))))) : Navigate to a button, then to a cylinder without entering blue regions, then to a button inside a blue region, and finally to a cylinder again.</div> <img src="images/zeroshot_Safety-Task-3-v0_.gif" alt="" width = 400px height = auto></td>
+    <td> <div style="position: absolute; top: 50%; right: 50%;">Safety-Task-3-v0 <br> F(buttons & X(F (( goal & ~hazards )&X(F(( buttons & hazards )&X(F goal)))))) <br> Navigate to a button, then to a cylinder without entering blue regions, then to a button inside a blue region, and finally to a cylinder again.</div> <img src="images/zeroshot_Safety-Task-3-v0_.gif" alt="" width = 400px height = auto></td>
     <td> <div style="position: absolute; top: 50%; right: 50%;">Safety-Task-6-v0 <br> F(hazards & X(F(( buttons & goal) & X ((F goal) & (G ~hazards))))) <br> Navigate to a blue region, then to a button with a cylinder, and finally to a cylinder while avoiding blue regions.</div> <img src="images/zeroshot_Safety-Task-6-v0_.gif" alt="" width = 400px height = auto></td>
   </tr>   
 </table>

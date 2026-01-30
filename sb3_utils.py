@@ -104,7 +104,7 @@ class EvaluateSaveCallback(BaseCallback):
     def _on_step(self) -> bool:        
         if (self.n_calls-1) % self.print_freq == 0:
             if self.task_env: self.rewards, self.successes, _ = evaluate(self.task_env, SM=self.SM, skill=self.skill, gamma=0.99, eval_steps=self.eval_steps, seed=self.seed) 
-            else:             self.rewards, self.successes, _ = np.sum(self.primitive_env.rewards), np.sum(self.primitive_env.successes)/100
+            else:             self.rewards, self.successes = np.sum(self.primitive_env.rewards), np.sum(self.primitive_env.successes)/100
             if self.rewards >= self.best:
                 self.best = self.rewards
                 if self.SM:    self.model.save(self.save_dir+"wvf_"+self.primitive_env.primitive)   
