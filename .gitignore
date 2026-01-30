@@ -1,0 +1,9 @@
+log
+*log
+log*
+data/
+#*data/
+__pycache__/
+*__pycache__/
+MUJOCO_LOG.TXT
+*MUJOCO_LOG.TXT

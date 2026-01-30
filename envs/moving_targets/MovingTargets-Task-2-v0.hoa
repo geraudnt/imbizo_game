@@ -1,0 +1,22 @@
+HOA: v1
+name: "F(blue & XF(purple & XF(!blue & !purple & (circle | square))))"
+States: 4
+Start: 2
+AP: 4 "blue" "purple" "circle" "square"
+acc-name: Buchi
+Acceptance: 1 Inf(0)
+properties: trans-labels explicit-labels state-acc complete
+properties: deterministic terminal very-weak
+--BODY--
+State: 0 {0}
+[t] 2
+State: 1
+[!0&!1&2 | !0&!1&3] 0
+[0 | 1 | !2&!3] 1
+State: 2
+[!0] 2
+[0] 3
+State: 3
+[1] 1
+[!1] 3
+--END--
