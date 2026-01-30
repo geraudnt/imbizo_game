@@ -80,9 +80,9 @@ pytz==2024.1
 PyYAML==6.0.2
 requests==2.32.3
 requests-oauthlib==2.0.0
-rpm @ file:///home/conda/feedstock_root/build_artifacts/rpm-tools_1698510443406/work/python
+# rpm @ file:///home/conda/feedstock_root/build_artifacts/rpm-tools_1698510443406/work/python
 rsa==4.9
--e git+https://github.com/geraudnt/skill_machines@5d6d7a6055e2d2f927ae8f57e646c72d7e844b62#egg=safety_gym&subdirectory=envs/safety_gym/safety-gym
+# -e git+https://github.com/geraudnt/skill_machines@5d6d7a6055e2d2f927ae8f57e646c72d7e844b62#egg=safety_gym&subdirectory=envs/safety_gym/safety-gym
 scipy==1.10.1
 seaborn==0.13.2
 sentry-sdk==2.22.0
